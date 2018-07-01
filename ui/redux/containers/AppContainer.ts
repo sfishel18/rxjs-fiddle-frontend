@@ -1,19 +1,20 @@
-import App from "../../components/App";
-import { actions } from "../modules/counter-module";
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
-import { CombinedState } from "../combined-reducer";
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import App from '../../components/App';
+import { counterActions, counterSelectors } from '../modules/counter-module';
+import { CombinedState } from '../types';
 
 const mapStateToProps = (state: CombinedState) => ({
-  value: state.counter.value
+  history: counterSelectors.getHistory(state.counter),
+  value: counterSelectors.getValue(state.counter),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onIncrement: (value: number) => dispatch(actions.increment(value)),
-  onDecrement: (value: number) => dispatch(actions.decrement(value))
+  onDecrement: (value: number) => dispatch(counterActions.decrement(value)),
+  onIncrement: (value: number) => dispatch(counterActions.increment(value)),
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(App);
