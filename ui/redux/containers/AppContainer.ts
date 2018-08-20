@@ -1,17 +1,15 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import App from '../../components/App';
-import { counterActions, counterSelectors } from '../modules/counter-module';
+import { codeInputActions, codeInputSelectors } from '../modules/code-input-module';
 import { CombinedState } from '../types';
 
 const mapStateToProps = (state: CombinedState) => ({
-  history: counterSelectors.getHistory(state.counter),
-  value: counterSelectors.getValue(state.counter),
+  editorState: codeInputSelectors.getEditorState(state.codeInput),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onDecrement: (value: number) => dispatch(counterActions.decrement(value)),
-  onIncrement: (value: number) => dispatch(counterActions.increment(value)),
+  onEditorContentChange: editorState => dispatch(codeInputActions.updateEditorState(editorState)),
 });
 
 export default connect(

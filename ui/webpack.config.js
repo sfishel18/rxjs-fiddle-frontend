@@ -1,33 +1,37 @@
-const path = require("path");
-const webpack = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, "app.tsx")
+    app: path.resolve(__dirname, 'app.tsx'),
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
-        exclude: /node_modules/
-      }
-    ]
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+      },
+    ],
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"]
+    extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
-    filename: "[name].js",
-    path: path.resolve(__dirname, "build")
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'build'),
   },
-  devtool: "inline-source-map",
+  devtool: 'inline-source-map',
   devServer: {
-    hot: true
+    hot: true,
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: path.resolve(__dirname, "index.html") }),
-    new webpack.HotModuleReplacementPlugin()
-  ]
+    new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'index.html') }),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
 };

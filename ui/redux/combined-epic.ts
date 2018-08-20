@@ -1,4 +1,4 @@
 import { combineEpics } from 'redux-observable';
-import counterEpic from './epics/counter-epic';
+import codeInputEpic from './epics/code-input-epic';
 
-export default combineEpics(counterEpic);
+export default combineEpics(codeInputEpic);

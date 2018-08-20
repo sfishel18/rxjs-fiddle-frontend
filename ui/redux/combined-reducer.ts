@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import counterReducer from './modules/counter-module';
+import codeInputReducer from './modules/code-input-module';
 
 const combinedReducer = combineReducers({
-  counter: counterReducer,
+  codeInput: codeInputReducer,
 });
 
 export default combinedReducer;

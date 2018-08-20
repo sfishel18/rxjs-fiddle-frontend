@@ -1,7 +1,7 @@
 import { Epic } from 'redux-observable';
-import { ActionType, createStandardAction, StateType } from 'typesafe-actions';
+import { StateType } from 'typesafe-actions';
 import combinedReducer from './combined-reducer';
-import { CounterAction } from './modules/counter-module';
+import { CodeInputAction } from './modules/code-input-module';
 
 export interface Services {
   log: (message: string) => void;
@@ -9,11 +9,6 @@ export interface Services {
 
 export type CombinedState = StateType<typeof combinedReducer>;
 
-export type CombinedAction = CounterAction;
+export type CombinedAction = CodeInputAction;
 
-export type ModuleEpic<T extends CombinedAction> = Epic<
-  CombinedAction,
-  T,
-  CombinedState,
-  Services
->;
+export type ModuleEpic<T extends CombinedAction> = Epic<CombinedAction, T, CombinedState, Services>;
