@@ -5,9 +5,9 @@
   "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --mode development --config ui/webpack.config.js",
-    "fmt": "prettier \"ui/**/*.{ts,tsx}\" --write",
-    "lint": "tslint -c tslint.json \"ui/**/*.{ts,tsx}\""
+    "start": "webpack-dev-server --mode development --config webpack.config.js",
+    "fmt": "prettier \"./**/*.{ts,tsx}\" --write",
+    "lint": "tslint -c tslint.json \"./**/*.{ts,tsx}\" -e \"./{build,node_modules}/**\""
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,5 @@
 import { filter, ignoreElements } from 'rxjs/operators';
-import { isActionOf } from '../../../node_modules/typesafe-actions';
+import { isActionOf } from 'typesafe-actions';
 import { CodeInputAction, codeInputActions } from '../modules/code-input-module';
 import { ModuleEpic } from '../types';
 

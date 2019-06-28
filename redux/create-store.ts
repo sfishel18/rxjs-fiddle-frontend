@@ -13,11 +13,7 @@ const epicMiddleware = createEpicMiddleware<
 >({ dependencies: services });
 
 export default (initialState?: object) => {
-  const store = createStore(
-    combinedReducer,
-    initialState,
-    applyMiddleware(epicMiddleware),
-  );
+  const store = createStore(combinedReducer, initialState, applyMiddleware(epicMiddleware));
   epicMiddleware.run(combinedEpic);
   return store;
 };
