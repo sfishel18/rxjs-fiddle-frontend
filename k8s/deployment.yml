@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: rxjs-fiddle-frontend
-          image: gcr.io/rxjs-fiddle/frontend:canary
+          image: gcr.io/rxjs-fiddle/frontend:${IMAGE_TAG}
           ports:
             - containerPort: 8080

@@ -47,8 +47,8 @@ jobs:
       - run: echo ${GCLOUD_SERVICE_KEY} > keyfile.json
       - run: gcloud auth activate-service-account ${GCLOUD_SERVICE_NAME} --key-file keyfile.json
       - run: gcloud container clusters get-credentials rxjs-fiddle-cluster --zone us-central1-a --project rxjs-fiddle
-      - run: envsubst < k8s/deployment.yml | kubectl apply -n << parameters.env >> -f -
-      - run: envsubst < k8s/service.yml | kubectl apply -n << parameters.env >> -f -
+      - run: IMAGE_TAG=<< parameters.image-tag >> envsubst < k8s/deployment.yml | kubectl apply -n << parameters.env >> -f -
+      - run: IMAGE_TAG=<< parameters.image-tag >> envsubst < k8s/service.yml | kubectl apply -n << parameters.env >> -f -
 
 workflows:
   Deploy to Staging for Commits to Master:
@@ -60,6 +60,7 @@ workflows:
               only: master
       - Deploy:
           env: staging
+          image-tag: latest
           requires:
             - Build and Publish Image
           filters:
@@ -90,6 +91,7 @@ workflows:
               ignore: /.*/
       - Deploy:
           env: default
+          image-tag: ${CIRCLE_TAG}
           requires:
             - Build and Publish Image
           filters:
