@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rxjs-fiddle-frontend-deployment
+  labels:
+    app: rxjs-fiddle-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rxjs-fiddle-frontend
+  template:
+    metadata:
+      labels:
+        app: rxjs-fiddle-frontend
+    spec:
+      containers:
+        - name: rxjs-fiddle-frontend
+          image: gcr.io/rxjs-fiddle/frontend:canary
+          ports:
+            - containerPort: 8080
