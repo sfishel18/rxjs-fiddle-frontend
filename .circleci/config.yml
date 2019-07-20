@@ -35,6 +35,8 @@ jobs:
     parameters:
       env:
         type: string
+      image-tag:
+        type: string
 
     docker:
       - image: gcr.io/rxjs-fiddle/ci/gcloud:0.0.12
