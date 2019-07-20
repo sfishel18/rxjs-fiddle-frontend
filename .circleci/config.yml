@@ -60,8 +60,6 @@ workflows:
               only: master
       - Deploy:
           env: staging
-          version: ${CIRCLE_SHA1}
-          image-tag: latest
           requires:
             - Build and Publish Image
           filters:
@@ -92,8 +90,6 @@ workflows:
               ignore: /.*/
       - Deploy:
           env: default
-          version: ${CIRCLE_TAG}
-          image-tag: ${CIRCLE_TAG}
           requires:
             - Build and Publish Image
           filters:
