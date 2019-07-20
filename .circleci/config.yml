@@ -1,16 +1,103 @@
-version: 2
+version: 2.1
 jobs:
-  build:
+  Build and Publish Image:
+    parameters:
+      tag:
+        type: string
+        default: latest
+
     docker:
-      - image: debian:stretch
+      - image: docker:latest
 
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: echo "${GCLOUD_SERVICE_KEY}" | docker login -u _json_key --password-stdin https://gcr.io
+      - run: docker build -t gcr.io/rxjs-fiddle/frontend:<< parameters.tag >> -f Dockerfile .
+      - run: docker push gcr.io/rxjs-fiddle/frontend:<< parameters.tag >>
 
-      - run:
-          name: Greeting
-          command: echo Hello, world.
+  Bump Git Tag:
+    docker:
+      - image: gcr.io/rxjs-fiddle/ci/gitversion:0.0.8
+        auth:
+          username: _json_key
+          password: ${GCLOUD_SERVICE_KEY}
 
-      - run:
-          name: Print the Current Time
-          command: date
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - '19:86:7d:89:ad:2b:24:95:d5:fe:59:1a:92:46:4f:02'
+      - checkout
+      - run: gitversion bump auto
+      - run: git push origin --tags
+  Deploy:
+    parameters:
+      env:
+        type: string
+
+    docker:
+      - image: gcr.io/rxjs-fiddle/ci/gcloud:0.0.12
+        auth:
+          username: _json_key
+          password: ${GCLOUD_SERVICE_KEY}
+
+    steps:
+      - checkout
+      - run: echo ${GCLOUD_SERVICE_KEY} > keyfile.json
+      - run: gcloud auth activate-service-account ${GCLOUD_SERVICE_NAME} --key-file keyfile.json
+      - run: gcloud container clusters get-credentials rxjs-fiddle-cluster --zone us-central1-a --project rxjs-fiddle
+      - run: envsubst < k8s/deployment.yml | kubectl apply -n << parameters.env >> -f -
+      - run: envsubst < k8s/service.yml | kubectl apply -n << parameters.env >> -f -
+
+workflows:
+  Deploy to Staging for Commits to Master:
+    jobs:
+      - Build and Publish Image:
+          tag: latest
+          filters:
+            branches:
+              only: master
+      - Deploy:
+          env: staging
+          version: ${CIRCLE_SHA1}
+          image-tag: latest
+          requires:
+            - Build and Publish Image
+          filters:
+            branches:
+              only: master
+      - hold:
+          type: approval
+          requires:
+            - Deploy
+          filters:
+            branches:
+              only: master
+      - Bump Git Tag:
+          requires:
+            - hold
+          filters:
+            branches:
+              only: master
+
+  Deploy to Production for Tags:
+    jobs:
+      - Build and Publish Image:
+          tag: ${CIRCLE_TAG}
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
+      - Deploy:
+          env: default
+          version: ${CIRCLE_TAG}
+          image-tag: ${CIRCLE_TAG}
+          requires:
+            - Build and Publish Image
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
