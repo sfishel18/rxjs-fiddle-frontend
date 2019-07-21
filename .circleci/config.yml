@@ -70,7 +70,7 @@ workflows:
               only: master
       - Deploy:
           env: staging
-          image-tag: latest
+          image-tag: ${CIRCLE_SHA1}
           requires:
             - Build and Publish Image
           filters:
