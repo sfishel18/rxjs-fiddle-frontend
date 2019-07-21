@@ -27,7 +27,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - '19:86:7d:89:ad:2b:24:95:d5:fe:59:1a:92:46:4f:02'
+            - 'f9:48:ae:4c:7a:46:c9:f1:b4:8d:a3:4a:5c:03:37:9a'
       - checkout
       - run: gitversion bump auto
       - run: git push origin --tags
