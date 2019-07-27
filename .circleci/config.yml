@@ -44,6 +44,8 @@ jobs:
         type: string
       image-tag:
         type: string
+      api-url:
+        type: string
 
     docker:
       - image: gcr.io/rxjs-fiddle/ci/gcloud:0.0.12
@@ -56,8 +58,8 @@ jobs:
       - run: echo ${GCLOUD_SERVICE_KEY} > keyfile.json
       - run: gcloud auth activate-service-account ${GCLOUD_SERVICE_NAME} --key-file keyfile.json
       - run: gcloud container clusters get-credentials rxjs-fiddle-cluster --zone us-central1-a --project rxjs-fiddle
-      - run: IMAGE_TAG=<< parameters.image-tag >> envsubst < k8s/deployment.yml | kubectl apply -n << parameters.env >> -f -
-      - run: IMAGE_TAG=<< parameters.image-tag >> envsubst < k8s/service.yml | kubectl apply -n << parameters.env >> -f -
+      - run: IMAGE_TAG=<< parameters.image-tag >> API_URL=<< parameters.api-url >> envsubst < k8s/deployment.yml | kubectl apply -n << parameters.env >> -f -
+      - run: IMAGE_TAG=<< parameters.image-tag >> API_URL=<< parameters.api-url >> envsubst < k8s/service.yml | kubectl apply -n << parameters.env >> -f -
 
 workflows:
   Deploy to Staging for Commits to Master:
@@ -71,6 +73,7 @@ workflows:
       - Deploy:
           env: staging
           image-tag: ${CIRCLE_SHA1}
+          api-url: http://api-staging.rxjs-fiddle.com
           requires:
             - Build and Publish Image
           filters:
@@ -102,6 +105,7 @@ workflows:
       - Deploy:
           env: default
           image-tag: ${CIRCLE_TAG}
+          api-url: http://api.rxjs-fiddle.com
           requires:
             - Build and Publish Image
           filters:

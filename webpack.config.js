@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const { get } = require('lodash');
 
 module.exports = {
   entry: {
@@ -23,15 +25,21 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
-    filename: '[name].js',
+    filename: '[name].[hash].js',
     path: path.resolve(__dirname, 'build'),
   },
   devtool: 'inline-source-map',
   devServer: {
+    headers: {
+      'Set-Cookie': `API_URL=${get(process.env, 'API_URL', 'http://api-staging.rxjs-fiddle.com')}`,
+    },
     hot: true,
   },
   plugins: [
     new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'index.html') }),
     new webpack.HotModuleReplacementPlugin(),
   ],
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
+  },
 };
