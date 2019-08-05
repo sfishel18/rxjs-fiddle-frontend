@@ -5,7 +5,7 @@ import AppContainer from './redux/containers/AppContainer';
 import createStore from './redux/create-store';
 import services from './redux/services';
 
-const store = createStore(null, services);
+const store = createStore(undefined, services);
 
 ReactDom.render(
   <Provider store={store}>
