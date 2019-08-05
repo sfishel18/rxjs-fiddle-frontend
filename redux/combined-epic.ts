@@ -1,4 +1,4 @@
 import { combineEpics } from 'redux-observable';
-import codeInputEpic from './epics/code-input-epic';
+import observableOutputEpic from './epics/observable-output-epic';
 
-export default combineEpics(codeInputEpic);
+export default combineEpics(observableOutputEpic);

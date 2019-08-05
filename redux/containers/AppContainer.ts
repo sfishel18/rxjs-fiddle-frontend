@@ -1,15 +1,14 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import App from '../../components/App';
-import { codeInputActions, codeInputSelectors } from '../modules/code-input-module';
-import { CombinedState } from '../types';
+import { observableOutputActions } from '../modules/observable-output-module';
 
-const mapStateToProps = (state: CombinedState) => ({
-  editorState: codeInputSelectors.getEditorState(state.codeInput),
-});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onEditorContentChange: editorState => dispatch(codeInputActions.updateEditorState(editorState)),
+  onRunFiddle() {
+    dispatch(observableOutputActions.request());
+  },
 });
 
 export default connect(

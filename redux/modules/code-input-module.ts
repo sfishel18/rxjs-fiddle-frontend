@@ -1,4 +1,4 @@
-import { convertFromRaw, EditorState } from 'draft-js';
+import { convertFromRaw, convertToRaw, EditorState } from 'draft-js';
 import PrismDecorator from 'draft-js-prism';
 import Prism from 'prismjs';
 import { ActionType, createStandardAction, getType } from 'typesafe-actions';
@@ -29,7 +29,18 @@ const defaultState: State = {
           entityRanges: [],
           inlineStyleRanges: [],
           key: '',
-          text: '',
+          text: `interval(1000).pipe(
+  take(4),
+  map(x => {
+    if (x > 2) {
+      throw new Error("oh noes");
+    }
+    return x * 10;
+  })
+)
+.subscribe(
+  x => console.log(x)
+);`,
           type: 'code-block',
         },
       ],
@@ -50,4 +61,9 @@ export default (state: State = defaultState, action: CodeInputAction): State => 
 
 const getEditorState = (state: State) => state.editorState;
 
-export const codeInputSelectors = { getEditorState };
+const getEditorSource = (state: State) =>
+  convertToRaw(state.editorState.getCurrentContent())
+    .blocks.map(block => block.text)
+    .join('\n');
+
+export const codeInputSelectors = { getEditorState, getEditorSource };
