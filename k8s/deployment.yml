@@ -19,6 +19,6 @@ spec:
           image: gcr.io/rxjs-fiddle/frontend:${IMAGE_TAG}
           ports:
             - containerPort: 8080
-          env:
-            - name: API_URL
-              value: ${API_URL}
+          envFrom:
+            - configMapRef:
+                name: rxjs-fiddle-frontend-env-config
