@@ -5,7 +5,7 @@ metadata:
   namespace: default
 data:
   API_URL: http://api.rxjs-fiddle.com
-  AUTH_BASIC: off
+  AUTH_BASIC: 'off'
 ---
 apiVersion: v1
 kind: ConfigMap
