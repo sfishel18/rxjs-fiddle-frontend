@@ -46,7 +46,7 @@ jobs:
         type: string
 
     docker:
-      - image: gcr.io/rxjs-fiddle/ci/gcloud:0.0.12
+      - image: gcr.io/rxjs-fiddle/ci/gcloud:0.0.13
         auth:
           username: _json_key
           password: ${GCLOUD_SERVICE_KEY}
@@ -56,6 +56,7 @@ jobs:
       - run: echo ${GCLOUD_SERVICE_KEY} > keyfile.json
       - run: gcloud auth activate-service-account ${GCLOUD_SERVICE_NAME} --key-file keyfile.json
       - run: gcloud container clusters get-credentials rxjs-fiddle-cluster --zone us-central1-a --project rxjs-fiddle
+      - run: kubectl create secret generic http-auth --from-literal=".htpasswd=$(htpasswd -nb ${STAGING_USER} ${STAGING_PASSWORD})" --dry-run | kubectl replace -n << parameters.env >> -f -
       - run: kubectl apply -f k8s/env-configs.yml
       - run: IMAGE_TAG=<< parameters.image-tag >> envsubst < k8s/deployment.yml | kubectl apply -n << parameters.env >> -f -
       - run: IMAGE_TAG=<< parameters.image-tag >> envsubst < k8s/service.yml | kubectl apply -n << parameters.env >> -f -

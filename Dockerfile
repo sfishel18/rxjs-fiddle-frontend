@@ -10,4 +10,5 @@ FROM openresty/openresty:alpine
 EXPOSE 8080
 
 COPY nginx/nginx.conf /usr/local/openresty/nginx/conf/
+COPY nginx/.htpasswd /usr/local/openresty/nginx/auth/
 COPY --from=webpack /home/build/ /var/www/

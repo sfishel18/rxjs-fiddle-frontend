@@ -5,6 +5,7 @@ metadata:
   namespace: default
 data:
   API_URL: http://api.rxjs-fiddle.com
+  AUTH_BASIC: off
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -13,3 +14,4 @@ metadata:
   namespace: staging
 data:
   API_URL: http://api-staging.rxjs-fiddle.com
+  AUTH_BASIC: Staging Environment

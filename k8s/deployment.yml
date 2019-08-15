@@ -22,3 +22,10 @@ spec:
           envFrom:
             - configMapRef:
                 name: rxjs-fiddle-frontend-env-config
+          volumeMounts:
+            - name: http-auth-volume
+              mountPath: /usr/local/openresty/nginx/auth
+      volumes:
+        - name: http-auth-volume
+          secret:
+            secretName: http-auth
