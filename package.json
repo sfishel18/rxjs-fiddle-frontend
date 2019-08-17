@@ -38,6 +38,7 @@
     "webpack-dev-server": "^3.7.2"
   },
   "dependencies": {
+    "d3-scale": "^3.0.1",
     "draft-js": "^0.10.5",
     "draft-js-prism": "^1.0.6",
     "js-cookie": "^2.2.0",
