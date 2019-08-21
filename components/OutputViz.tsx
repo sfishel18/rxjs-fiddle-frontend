@@ -34,8 +34,8 @@ export default class extends React.Component<Props> {
               <path strokeWidth={1} stroke="black" d={`M 0 50 L ${xScale(completionTime)} 50`} />
               {stream.events
                 .filter(event => event.type === 'value' || event.type === 'error')
-                .map(event => (
-                  <g transform={`translate(${xScale(event.timestamp)}, 50)`}>
+                .map((event, j) => (
+                  <g key={j} transform={`translate(${xScale(event.timestamp)}, 50)`}>
                     {event.type === 'value' && (
                       <>
                         <circle r={25} fill="green" />
