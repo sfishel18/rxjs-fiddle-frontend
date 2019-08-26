@@ -1,4 +1,4 @@
-import { scaleLinear } from 'd3-scale';
+import { scaleLinear } from 'd3';
 import { find, flatten, get, map, max } from 'lodash';
 import * as React from 'react';
 
