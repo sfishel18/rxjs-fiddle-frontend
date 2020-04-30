@@ -12,20 +12,16 @@ const StyledGrommet = styled(Grommet)`
   display: flex;
 `;
 
-export default class extends React.Component<Props> {
-  public render() {
-    return (
-      <StyledGrommet plain>
-        <div style={{ flex: '1 0 50% ', display: 'flex', flexDirection: 'column' }}>
-          <div>
-            <button onClick={this.props.onRunFiddle}>Run</button>
-          </div>
-          <CodeEditorContainer />
-        </div>
-        <div style={{ flex: '1 0 50% ' }}>
-          <OutputVizContainer />
-        </div>
-      </StyledGrommet>
-    );
-  }
-}
+export default (props: Props) => (
+  <StyledGrommet plain>
+    <div style={{ flex: '1 0 50% ', display: 'flex', flexDirection: 'column' }}>
+      <div>
+        <button onClick={props.onRunFiddle}>Run</button>
+      </div>
+      <CodeEditorContainer />
+    </div>
+    <div style={{ flex: '1 0 50% ' }}>
+      <OutputVizContainer />
+    </div>
+  </StyledGrommet>
+);

@@ -8,10 +8,6 @@ interface Props {
   onChange: (editorState: EditorState) => any;
 }
 
-export default class extends React.Component<Props> {
-  public render() {
-    return <Editor editorState={this.props.editorState} onChange={this.onChange} />;
-  }
-
-  private onChange = (editorState: EditorState) => this.props.onChange(editorState);
-}
+export default (props: Props) => {
+  return <Editor editorState={props.editorState} onChange={props.onChange} />;
+};
