@@ -1,12 +1,12 @@
 import { scaleLinear } from 'd3';
 import { find, flatten, get, map, max } from 'lodash';
-import * as React from 'react';
+import React from 'react';
 
 interface Props {
   output: any[];
 }
 
-export default (props: Props) => {
+const OutputViz: React.FC<Props> = props => {
   const { output } = props;
   if (!output || output.length === 0) {
     return null;
@@ -55,3 +55,5 @@ export default (props: Props) => {
     </svg>
   );
 };
+
+export default OutputViz;

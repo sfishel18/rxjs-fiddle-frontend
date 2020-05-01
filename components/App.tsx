@@ -1,5 +1,5 @@
 import { Grommet } from 'grommet';
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import CodeEditorContainer from '../redux/containers/CodeEditorContainer';
 import OutputVizContainer from '../redux/containers/OutputVizContainer';
@@ -12,7 +12,7 @@ const StyledGrommet = styled(Grommet)`
   display: flex;
 `;
 
-export default (props: Props) => (
+const App: React.FC<Props> = props => (
   <StyledGrommet plain>
     <div style={{ flex: '1 0 50% ', display: 'flex', flexDirection: 'column' }}>
       <div>
@@ -25,3 +25,5 @@ export default (props: Props) => (
     </div>
   </StyledGrommet>
 );
+
+export default App;

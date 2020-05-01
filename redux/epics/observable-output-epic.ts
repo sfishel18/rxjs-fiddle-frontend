@@ -1,4 +1,4 @@
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError, filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { isActionOf } from 'typesafe-actions';
 import { codeInputSelectors } from '../modules/code-input-module';

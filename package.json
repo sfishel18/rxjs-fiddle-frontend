@@ -22,9 +22,9 @@
   "homepage": "https://github.com/sfishel18/rxjs-fiddle#readme",
   "devDependencies": {
     "@types/draft-js": "^0.10.34",
-    "@types/react": "^16.8.22",
-    "@types/react-dom": "^16.8.4",
-    "@types/react-redux": "^7.1.1",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.7",
+    "@types/react-redux": "^7.1.7",
     "css-loader": "^3.0.0",
     "html-webpack-plugin": "^3.2.0",
     "prettier": "^1.18.2",

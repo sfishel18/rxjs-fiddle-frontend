@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import App from '../../components/App';
 import { observableOutputActions } from '../modules/observable-output-module';
 
-export default () => {
+const AppContainer: React.FC = () => {
   const dispatch = useDispatch();
   const onRunFiddle = React.useCallback(() => dispatch(observableOutputActions.request()), [
     dispatch,
@@ -11,3 +11,5 @@ export default () => {
   ]);
   return <App onRunFiddle={onRunFiddle} />;
 };
+
+export default AppContainer;
