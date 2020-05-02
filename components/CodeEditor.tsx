@@ -5,7 +5,7 @@ import React from 'react';
 
 interface Props {
   editorState: EditorState;
-  onChange: (editorState: EditorState) => any;
+  onChange: (editorState: EditorState) => void;
 }
 
 const CodeEditor: React.FC<Props> = props => {

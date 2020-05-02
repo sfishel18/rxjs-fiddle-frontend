@@ -5,6 +5,7 @@
   "rules": {
     "arrow-parens": [true, "ban-single-arg-parens"],
     "interface-name": false,
+    "no-any": true,
     "quotemark": [true, "single", "jsx-double"],
     "semicolon": [true, "always", "ignore-bound-class-methods"]
   },

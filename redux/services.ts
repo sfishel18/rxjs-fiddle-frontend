@@ -5,7 +5,13 @@ import { Services } from './types';
 
 const API_URL = cookie.get('API_URL');
 
-const apiAjax = ajaxObj =>
+interface AjaxObject {
+  body: object;
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+  url: string;
+}
+
+const apiAjax = (ajaxObj: AjaxObject) =>
   ajax({
     headers: {
       'Content-Type': 'application/json',
@@ -14,7 +20,7 @@ const apiAjax = ajaxObj =>
     url: `${API_URL}/${ajaxObj.url}`,
   });
 
-const fetchFiddleOutput = source =>
+const fetchFiddleOutput = (source: string) =>
   apiAjax({
     body: { source },
     method: 'POST',

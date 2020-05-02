@@ -1,9 +1,10 @@
 import { scaleLinear } from 'd3';
 import { find, flatten, get, map, max } from 'lodash';
 import React from 'react';
+import { FiddleOutput } from '../redux/types';
 
 interface Props {
-  output: any[];
+  output: FiddleOutput;
 }
 
 const OutputViz: React.FC<Props> = props => {
@@ -11,9 +12,8 @@ const OutputViz: React.FC<Props> = props => {
   if (!output || output.length === 0) {
     return null;
   }
-  const maxTimeValue = max(
-    flatten(map(output, stream => stream.events.map(event => event.timestamp))),
-  );
+  const maxTimeValue =
+    max(flatten(map(output, stream => stream.events.map(event => event.timestamp)))) || 0;
   const xScale = scaleLinear()
     .domain([0, maxTimeValue * 1.1])
     .range([0, 700])

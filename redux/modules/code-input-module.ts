@@ -46,7 +46,8 @@ const defaultState: State = {
       ],
       entityMap: {},
     }),
-    prismDecorator,
+    // tslint:disable-next-line:no-any
+    prismDecorator as any,
   ),
 };
 

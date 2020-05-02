@@ -1,6 +1,7 @@
 import { ActionType, createStandardAction, getType } from 'typesafe-actions';
+import { FiddleOutput } from '../types';
 
-type Output = any[];
+type Output = FiddleOutput;
 
 const request = createStandardAction('rxjs-fiddle/observable-output/REQUEST')();
 const receiveSuccess = createStandardAction('rxjs-fiddle/observable-output/RECEIVE_SUCCESS')<

@@ -5,8 +5,21 @@ import combinedReducer from './combined-reducer';
 import { CodeInputAction } from './modules/code-input-module';
 import { ObservableOutputAction } from './modules/observable-output-module';
 
+interface StreamEvent {
+  timestamp: number;
+  type: string;
+  value: string;
+}
+
+interface OutputStream {
+  name: string;
+  events: StreamEvent[];
+}
+
+export type FiddleOutput = OutputStream[];
+
 export interface Services {
-  fetchFiddleOutput: (source: string) => Observable<any>;
+  fetchFiddleOutput: (source: string) => Observable<FiddleOutput>;
 }
 
 export type CombinedState = StateType<typeof combinedReducer>;
