@@ -65,3 +65,5 @@ typings/
 
 # build output
 build
+
+k8s/account.json

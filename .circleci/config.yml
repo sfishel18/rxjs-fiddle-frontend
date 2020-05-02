@@ -54,8 +54,8 @@ jobs:
     steps:
       - checkout
       - run: echo ${GCLOUD_SERVICE_KEY} > keyfile.json
-      - run: gcloud auth activate-service-account ${GCLOUD_SERVICE_NAME} --key-file keyfile.json
-      - run: gcloud container clusters get-credentials rxjs-fiddle-cluster --zone us-central1-a --project rxjs-fiddle
+      - run: gcloud auth activate-service-account --key-file keyfile.json
+      - run: gcloud container clusters get-credentials my-gke-cluster --zone us-west1-a --project k8s-cluster-275622
       - run: kubectl create secret generic http-auth --from-literal=".htpasswd=$(htpasswd -nb ${STAGING_USER} ${STAGING_PASSWORD})" -o yaml --dry-run | kubectl replace -n << parameters.env >> -f -
       - run: kubectl apply -f k8s/env-configs.yml
       - run: IMAGE_TAG=<< parameters.image-tag >> envsubst < k8s/deployment.yml | kubectl apply -n << parameters.env >> -f -
@@ -74,8 +74,8 @@ jobs:
 
     steps:
       - run: echo ${GCLOUD_SERVICE_KEY} > keyfile.json
-      - run: gcloud auth activate-service-account ${GCLOUD_SERVICE_NAME} --key-file keyfile.json
-      - run: gcloud container clusters get-credentials rxjs-fiddle-cluster --zone us-central1-a --project rxjs-fiddle
+      - run: gcloud auth activate-service-account --key-file keyfile.json
+      - run: gcloud container clusters get-credentials my-gke-cluster --zone us-west1-a --project k8s-cluster-275622
       - run: kubectl rollout undo -n << parameters.env >> deployment/rxjs-fiddle-frontend-deployment
 
 workflows:
