@@ -16,7 +16,7 @@ jobs:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: false
-      - run: echo "${GCLOUD_SERVICE_KEY}" | docker login -u _json_key --password-stdin https://gcr.io
+      - run: echo "${DOCKER_SERVICE_KEY}" | docker login -u _json_key --password-stdin https://gcr.io
       - run: docker build -t gcr.io/rxjs-fiddle/frontend:<< parameters.tag >> -f Dockerfile .
       - when:
           condition: << parameters.should-tag-latest >>
@@ -29,7 +29,7 @@ jobs:
       - image: gcr.io/rxjs-fiddle/ci/gitversion:0.0.8
         auth:
           username: _json_key
-          password: ${GCLOUD_SERVICE_KEY}
+          password: ${DOCKER_SERVICE_KEY}
 
     steps:
       - add_ssh_keys:
@@ -49,11 +49,11 @@ jobs:
       - image: gcr.io/rxjs-fiddle/ci/gcloud:0.0.13
         auth:
           username: _json_key
-          password: ${GCLOUD_SERVICE_KEY}
+          password: ${DOCKER_SERVICE_KEY}
 
     steps:
       - checkout
-      - run: echo ${GCLOUD_SERVICE_KEY} > keyfile.json
+      - run: echo ${K8S_SERVICE_KEY} > keyfile.json
       - run: gcloud auth activate-service-account --key-file keyfile.json
       - run: gcloud container clusters get-credentials my-gke-cluster --zone us-west1-a --project k8s-cluster-275622
       - run: kubectl create secret generic http-auth --from-literal=".htpasswd=$(htpasswd -nb ${STAGING_USER} ${STAGING_PASSWORD})" -o yaml --dry-run | kubectl replace -n << parameters.env >> -f -
@@ -70,10 +70,10 @@ jobs:
       - image: gcr.io/rxjs-fiddle/ci/gcloud:0.0.13
         auth:
           username: _json_key
-          password: ${GCLOUD_SERVICE_KEY}
+          password: ${DOCKER_SERVICE_KEY}
 
     steps:
-      - run: echo ${GCLOUD_SERVICE_KEY} > keyfile.json
+      - run: echo ${K8S_SERVICE_KEY} > keyfile.json
       - run: gcloud auth activate-service-account --key-file keyfile.json
       - run: gcloud container clusters get-credentials my-gke-cluster --zone us-west1-a --project k8s-cluster-275622
       - run: kubectl rollout undo -n << parameters.env >> deployment/rxjs-fiddle-frontend-deployment
