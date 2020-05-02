@@ -56,7 +56,7 @@ jobs:
       - run: echo ${K8S_SERVICE_KEY} > keyfile.json
       - run: gcloud auth activate-service-account --key-file keyfile.json
       - run: gcloud container clusters get-credentials my-gke-cluster --zone us-west1-a --project k8s-cluster-275622
-      - run: kubectl create secret generic http-auth --from-literal=".htpasswd=$(htpasswd -nb ${STAGING_USER} ${STAGING_PASSWORD})" -o yaml --dry-run | kubectl replace -n << parameters.env >> -f -
+      - run: kubectl create -n << parameters.env >> secret generic http-auth --from-literal=".htpasswd=$(htpasswd -nb ${STAGING_USER} ${STAGING_PASSWORD})" -o yaml --dry-run | kubectl replace -n << parameters.env >> -f -
       - run: kubectl apply -f k8s/env-configs.yml
       - run: IMAGE_TAG=<< parameters.image-tag >> envsubst < k8s/deployment.yml | kubectl apply -n << parameters.env >> -f -
       - run: IMAGE_TAG=<< parameters.image-tag >> envsubst < k8s/service.yml | kubectl apply -n << parameters.env >> -f -
