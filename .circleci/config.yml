@@ -90,7 +90,7 @@ workflows:
             branches:
               only: master
       - Deploy:
-          env: rxjs-fiddle-frontend-stg
+          env: rxjs-fiddle-stg
           image-tag: ${CIRCLE_SHA1}
           requires:
             - Build and Publish Image
@@ -121,7 +121,7 @@ workflows:
             branches:
               ignore: /.*/
       - Deploy:
-          env: rxjs-fiddle-frontend-prod
+          env: rxjs-fiddle-prod
           image-tag: ${CIRCLE_TAG}
           requires:
             - Build and Publish Image
@@ -140,7 +140,7 @@ workflows:
             branches:
               ignore: /.*/
       - Rollback:
-          env: rxjs-fiddle-frontend-prod
+          env: rxjs-fiddle-prod
           requires:
             - Hold for Rollback
           filters:
