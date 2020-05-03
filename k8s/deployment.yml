@@ -25,6 +25,8 @@ spec:
           volumeMounts:
             - name: http-auth-volume
               mountPath: /usr/local/openresty/nginx/auth
+      imagePullSecrets:
+        - name: rxjs-fiddle-frontend-docker-creds
       volumes:
         - name: http-auth-volume
           secret:
