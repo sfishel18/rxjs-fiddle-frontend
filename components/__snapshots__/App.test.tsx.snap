@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots App Default State 1`] = `
+<div
+  className="StyledGrommet-sc-19lkkz7-0 kvbohY sc-bdVaJa kZAgjJ"
+>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flex": "1 0 50% ",
+        "flexDirection": "column",
+      }
+    }
+  >
+    <div>
+      <button
+        onClick={[Function]}
+      >
+        Run
+      </button>
+    </div>
+    <div
+      data-mock="CodeEditorContainer"
+    />
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 50% ",
+      }
+    }
+  >
+    <div
+      data-mock="OutputVizContainer"
+    />
+  </div>
+</div>
+`;
