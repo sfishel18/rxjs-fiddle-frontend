@@ -1,5 +1,12 @@
 version: 2.1
 jobs:
+  Unit Test:
+    docker:
+      - image: node:12
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm test
   Build and Publish Image:
     parameters:
       tag:
@@ -82,7 +89,10 @@ jobs:
 workflows:
   Deploy to Staging for Commits to Master:
     jobs:
+      - Unit Test
       - Build and Publish Image:
+          requires:
+            - Unit Test
           tag: ${CIRCLE_SHA1}
           should-tag-latest: true
           filters:
