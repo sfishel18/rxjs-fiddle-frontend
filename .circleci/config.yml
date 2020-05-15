@@ -12,6 +12,8 @@ jobs:
       - image: docker:latest
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: false
       - run: apk add nodejs npm
       - run: npm install
       - run: ./node_modules/.bin/concurrently -k --success first "npm run storybook" "npm run test:visual"
