@@ -98,9 +98,11 @@ workflows:
   Deploy to Staging for Commits to Master:
     jobs:
       - Unit Test
+      - Visual Test
       - Build and Publish Image:
           requires:
             - Unit Test
+            - Visual Test
           tag: ${CIRCLE_SHA1}
           should-tag-latest: true
           filters:

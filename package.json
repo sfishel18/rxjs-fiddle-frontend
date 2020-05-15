@@ -74,6 +74,11 @@
     "styled-components": "^4.4.1",
     "typesafe-actions": "^5.0.0-2"
   },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.css$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  },
   "loki": {
     "configurations": {
       "chrome.laptop": {
