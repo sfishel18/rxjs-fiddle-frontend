@@ -7,6 +7,14 @@ jobs:
       - checkout
       - run: npm install
       - run: npm test
+  Visual Test:
+    docker:
+      - image: docker:latest
+    steps:
+      - checkout
+      - run: apk add nodejs npm
+      - run: npm install
+      - run: ./node_modules/.bin/concurrently -k --success first "npm run storybook" "npm run test:visual"
   Build and Publish Image:
     parameters:
       tag:
