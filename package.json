@@ -9,8 +9,8 @@
     "build": "NODE_ENV=production webpack --mode production --config webpack.config.js",
     "fmt": "prettier \"./**/*.{ts,tsx}\" --write",
     "lint": "tslint -c tslint.json \"./**/*.{ts,tsx}\" -e \"./{build,node_modules}/**\"",
-    "storybook": "start-storybook -p 6006 -h 0.0.0.0",
-    "test:visual": "loki test"
+    "storybook": "start-storybook -p 6006",
+    "test:visual": "build-storybook && loki --requireReference --reactUri file:./storybook-static"
   },
   "repository": {
     "type": "git",

@@ -16,7 +16,7 @@ jobs:
           docker_layer_caching: false
       - run: apk add nodejs npm
       - run: npm install
-      - run: ./node_modules/.bin/concurrently -k --success first "npm run storybook" "npm run test:visual"
+      - run: npm run test:visual
   Build and Publish Image:
     parameters:
       tag:
