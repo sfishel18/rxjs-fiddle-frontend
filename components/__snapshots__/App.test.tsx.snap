@@ -20,9 +20,7 @@ exports[`Storyshots App Default State 1`] = `
         Run
       </button>
     </div>
-    <div
-      data-mock="CodeEditorContainer"
-    />
+    <CodeEditorContainer />
   </div>
   <div
     style={
@@ -31,9 +29,7 @@ exports[`Storyshots App Default State 1`] = `
       }
     }
   >
-    <div
-      data-mock="OutputVizContainer"
-    />
+    <OutputVizContainer />
   </div>
 </div>
 `;
