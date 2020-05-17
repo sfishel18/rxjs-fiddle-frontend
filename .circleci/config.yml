@@ -13,7 +13,6 @@ jobs:
     steps:
       - run: |
           curl -sSL https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-          apt-get update
           sudo apt-get install -y git-lfs
       - checkout
       - run: |
