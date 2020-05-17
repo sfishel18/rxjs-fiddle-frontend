@@ -12,17 +12,14 @@ jobs:
       image: ubuntu-1604:201903-01
     steps:
       - checkout
-      - run: 
-          name: Setup NVM
-          command: |
-            echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
-            echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
-      - run:
-          name: Update node
-          command: |
-            nvm install 12
-      - run: npm install
-      - run: npm run test:visual
+      - run: |
+          echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
+          echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
+          nvm install 12
+      - run: |
+          nvm use 12
+          npm install
+          npm run test:visual
   Build and Publish Image:
     parameters:
       tag:
