@@ -1,0 +1,5 @@
+{
+    "service_name": "rxjs-fiddle-frontend",
+    "collector_host": "${SIGNALFX_AGENT_HOST}",
+    "collector_port": 9080
+  }
