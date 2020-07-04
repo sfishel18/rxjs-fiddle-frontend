@@ -7,9 +7,9 @@ import services from './redux/services';
 
 const store = createStore(undefined, services);
 
-ReactDom.render(
+// tslint:disable-next-line: no-any
+(ReactDom as any).unstable_createRoot(document.getElementById('app')).render(
   <Provider store={store}>
     <AppContainer />
   </Provider>,
-  document.getElementById('app'),
 );

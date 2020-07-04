@@ -4,7 +4,7 @@ import React from 'react';
 import { FiddleOutput } from '../redux/types';
 
 interface Props {
-  output: FiddleOutput;
+  output: FiddleOutput | null;
 }
 
 const OutputViz: React.FC<Props> = props => {

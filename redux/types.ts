@@ -31,3 +31,17 @@ export type CombinedState = StateType<typeof combinedReducer>;
 export type CombinedAction = CodeInputAction | ObservableOutputAction;
 
 export type ModuleEpic<T extends CombinedAction> = Epic<CombinedAction, T, CombinedState, Services>;
+
+export const enum AsyncStatus {
+  Uninitialized = 'uninitialized',
+  InProgress = 'in-progress',
+  Complete = 'complete',
+  Error = 'error',
+}
+
+export interface AsyncValue<T> {
+  error: Error | null;
+  id: number;
+  status: AsyncStatus;
+  value: T;
+}

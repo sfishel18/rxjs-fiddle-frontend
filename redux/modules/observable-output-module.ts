@@ -1,5 +1,5 @@
 import { ActionType, createStandardAction, getType } from 'typesafe-actions';
-import { FiddleOutput } from '../types';
+import { AsyncStatus, AsyncValue, FiddleOutput } from '../types';
 
 type Output = FiddleOutput;
 
@@ -14,25 +14,44 @@ export const observableOutputActions = { request, receiveSuccess, receiveError }
 export type ObservableOutputAction = ActionType<typeof observableOutputActions>;
 
 interface State {
-  readonly error: string | null;
-  readonly loading: boolean;
-  readonly output: Output;
+  readonly output: AsyncValue<Output>;
 }
 
 const defaultState: State = {
-  error: null,
-  loading: false,
-  output: [],
+  output: {
+    error: null,
+    id: 0,
+    status: AsyncStatus.Uninitialized,
+    value: [],
+  },
 };
 
 export default (state: State = defaultState, action: ObservableOutputAction): State => {
   switch (action.type) {
     case getType(request):
-      return { ...state, loading: true };
+      return { ...state, output: {
+        ...defaultState.output,
+        id: state.output.id + 1,
+        status: AsyncStatus.InProgress,
+      },
+    };
     case getType(receiveSuccess):
-      return { ...state, output: action.payload, loading: false };
+      return { ...state, output: {
+        ...defaultState.output,
+        id: state.output.id,
+        status: AsyncStatus.Complete,
+        value: action.payload,
+      },
+    };
     case getType(receiveError):
-      return { ...state, error: action.payload, loading: false };
+      return { ...state,
+        output: {
+          ...defaultState.output,
+          error: new Error(action.payload),
+          id: state.output.id,
+          status: AsyncStatus.Error,
+        },
+      };
     default:
       return state;
   }

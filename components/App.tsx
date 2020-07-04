@@ -1,8 +1,10 @@
 import { Grommet } from 'grommet';
-import React from 'react';
+import React, { Suspense } from 'react';
 import styled from 'styled-components';
 import CodeEditorContainer from '../redux/containers/CodeEditorContainer';
 import OutputVizContainer from '../redux/containers/OutputVizContainer';
+import OutputErrorBoundary from './OutputErrorBoundary';
+import OutputLoadingSpinner from './OutputLoadingSpinner';
 
 interface Props {
   onRunFiddle: () => void;
@@ -20,8 +22,12 @@ const App: React.FC<Props> = props => (
       </div>
       <CodeEditorContainer />
     </div>
-    <div style={{ flex: '1 0 50% ' }}>
-      <OutputVizContainer />
+    <div style={{ flex: '1 0 50%', position: 'relative' }}>
+      <Suspense fallback={<OutputLoadingSpinner />}>
+        <OutputErrorBoundary>
+          <OutputVizContainer />
+        </OutputErrorBoundary>
+      </Suspense>
     </div>
   </StyledGrommet>
 );
