@@ -39,6 +39,7 @@
     "@types/react-dom": "^16.9.7",
     "@types/react-redux": "^7.1.7",
     "@types/styled-components": "^5.1.0",
+    "@types/zipkin-javascript-opentracing": "^1.6.0",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.0.0",
     "html-webpack-plugin": "^3.2.0",
@@ -64,6 +65,7 @@
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.15",
     "memoize-one": "^5.1.1",
+    "opentracing": "^0.14.4",
     "prismjs": "^1.16.0",
     "react": "0.0.0-experimental-33c3af284",
     "react-dom": "0.0.0-experimental-33c3af284",
@@ -72,7 +74,10 @@
     "redux-observable": "^1.2.0",
     "rxjs": "^6.5.5",
     "styled-components": "^4.4.1",
-    "typesafe-actions": "^5.0.0-2"
+    "typesafe-actions": "^5.0.0-2",
+    "zipkin": "^0.22.0",
+    "zipkin-javascript-opentracing": "^2.1.0",
+    "zipkin-transport-http": "^0.22.0"
   },
   "jest": {
     "moduleNameMapper": {
