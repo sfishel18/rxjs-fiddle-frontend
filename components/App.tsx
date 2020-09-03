@@ -1,8 +1,8 @@
 import { Grommet } from 'grommet';
 import React, { Suspense } from 'react';
 import styled from 'styled-components';
-import CodeEditorContainer from '../redux/containers/CodeEditorContainer';
-import OutputVizContainer from '../redux/containers/OutputVizContainer';
+import CodeEditorContainer from '../containers/CodeEditorContainer';
+import OutputVizContainer from '../containers/OutputVizContainer';
 import OutputErrorBoundary from './OutputErrorBoundary';
 import OutputLoadingSpinner from './OutputLoadingSpinner';
 

@@ -1,7 +1,7 @@
 import { scaleLinear } from 'd3';
 import { find, flatten, get, map, max } from 'lodash';
 import React from 'react';
-import { FiddleOutput } from '../redux/types';
+import { FiddleOutput } from '../types';
 
 interface Props {
   output: FiddleOutput | null;
