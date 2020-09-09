@@ -3,13 +3,11 @@ import React from 'react';
 
 const mockReact = React;
 
-jest.mock(
-    '../redux/containers/CodeEditorContainer',
-    () => (props: {}) => mockReact.createElement('CodeEditorContainer', props),
+jest.mock('../containers/CodeEditorContainer', () => (props: {}) =>
+  mockReact.createElement('CodeEditorContainer', props),
 );
-jest.mock(
-    '../redux/containers/OutputVizContainer',
-    () => (props: {}) => mockReact.createElement('OutputVizContainer', props),
+jest.mock('../containers/OutputVizContainer', () => (props: {}) =>
+  mockReact.createElement('OutputVizContainer', props),
 );
 
 initStoryshots({

@@ -2,7 +2,7 @@
 
 exports[`Storyshots App Default State 1`] = `
 <div
-  className="StyledGrommet-sc-19lkkz7-0 kvbohY sc-bdVaJa kZAgjJ"
+  className="StyledGrommet-sc-19lkkz7-0 kvbohY sc-htpNat cixthU"
 >
   <div
     style={
@@ -25,7 +25,8 @@ exports[`Storyshots App Default State 1`] = `
   <div
     style={
       Object {
-        "flex": "1 0 50% ",
+        "flex": "1 0 50%",
+        "position": "relative",
       }
     }
   >

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiddleOutput } from '../redux/types';
+import { FiddleOutput } from '../types';
 import OutputViz from './OutputViz';
 
 export default {

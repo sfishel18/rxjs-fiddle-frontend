@@ -1,13 +1,13 @@
 import cookie from 'js-cookie';
 import React from 'react';
 import ReactDom from 'react-dom';
-import { Provider } from 'react-redux';
+import { RecoilRoot } from 'recoil';
 import { BatchRecorder, jsonEncoder } from 'zipkin';
 import Tracer from 'zipkin-javascript-opentracing';
 import { HttpLogger } from 'zipkin-transport-http';
-import AppContainer from './redux/containers/AppContainer';
-import createStore from './redux/create-store';
-import services from './redux/services';
+import api from './api';
+import AppContainer from './containers/AppContainer';
+import AtomsStore from './stores/atoms-store';
 
 const tracer = new Tracer({
   kind: 'client',
@@ -24,11 +24,11 @@ const span = tracer.startSpan('aha');
 
 setTimeout(() => span.finish(), 5000);
 
-const store = createStore(undefined, services);
-
 // tslint:disable-next-line: no-any
 (ReactDom as any).unstable_createRoot(document.getElementById('app')).render(
-  <Provider store={store}>
-    <AppContainer />
-  </Provider>,
+  <RecoilRoot>
+    <AtomsStore api={api}>
+      <AppContainer />
+    </AtomsStore>
+  </RecoilRoot>,
 );
