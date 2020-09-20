@@ -15,6 +15,9 @@ const tracer = new Tracer({
     logger: new HttpLogger({
       endpoint: `${cookie.get('API_URL')}/v1/trace`,
       jsonEncoder: jsonEncoder.JSON_V2,
+      headers: {
+        'Content-Type': 'application/json',
+      },
     }),
   }),
   serviceName: 'frontend',
