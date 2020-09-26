@@ -1,9 +1,10 @@
+import dedent from 'dedent';
 import { convertFromRaw, convertToRaw, EditorState } from 'draft-js';
 import PrismDecorator from 'draft-js-prism';
 import { once } from 'lodash';
 import Prism from 'prismjs';
 import React, { useContext } from 'react';
-import { atom, selector } from 'recoil';
+import { atom, RecoilRoot, selector } from 'recoil';
 import { Api } from '../api';
 import { FiddleOutput } from '../types';
 
@@ -22,18 +23,18 @@ const createAtoms = once((api: Api) => {
             entityRanges: [],
             inlineStyleRanges: [],
             key: '',
-            text: `interval(1000).pipe(
-            take(4),
-            map(x => {
-            if (x > 2) {
-                throw new Error("oh noes");
-            }
-            return x * 10;
-            })
-        )
-        .subscribe(
-            x => console.log(x)
-        );`,
+            text: dedent`interval(1000).pipe(
+              take(4),
+              map(x => {
+              if (x > 2) {
+                  throw new Error("oh noes");
+              }
+              return x * 10;
+              })
+            )
+            .subscribe(
+              x => console.log(x)
+            );`,
             type: 'code-block',
           },
         ],
@@ -74,7 +75,11 @@ const AtomsContext = React.createContext<Atoms>((null as unknown) as Atoms);
 
 const AtomsStore: React.FC<{ api: Api }> = props => {
   const atoms = createAtoms(props.api);
-  return <AtomsContext.Provider value={atoms}>{props.children}</AtomsContext.Provider>;
+  return (
+    <RecoilRoot>
+      <AtomsContext.Provider value={atoms}>{props.children}</AtomsContext.Provider>
+    </RecoilRoot>
+  );
 };
 
 export default AtomsStore;
