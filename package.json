@@ -67,7 +67,7 @@
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.20",
     "opentracing": "^0.14.4",
-    "prismjs": "^1.16.0",
+    "prismjs": "^1.21.0",
     "react": "0.0.0-experimental-94c0244ba",
     "react-dom": "0.0.0-experimental-94c0244ba",
     "recoil": "0.0.11",
