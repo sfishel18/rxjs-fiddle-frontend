@@ -1,9 +1,11 @@
+import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import { FiddleOutput } from '../types';
 import OutputViz from './OutputViz';
 
 export default {
   title: 'Output Viz',
+  decorators: [(storyFn: React.FC) => <ChakraProvider>{storyFn({})}</ChakraProvider>],
 };
 
 const output: FiddleOutput = [

@@ -1,6 +1,6 @@
 import { Editor, EditorState } from 'draft-js';
 import 'draft-js/dist/Draft.css';
-import 'prismjs/themes/prism.css';
+import 'prismjs/themes/prism-dark.css';
 import React from 'react';
 
 interface Props {

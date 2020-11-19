@@ -2,35 +2,78 @@
 
 exports[`Storyshots App Default State 1`] = `
 <div
-  className="StyledGrommet-sc-19lkkz7-0 kvbohY sc-htpNat cixthU"
+  className="css-1k6vrxp"
 >
   <div
+    className="chakra-stack css-bb1f5k"
     style={
       Object {
-        "display": "flex",
-        "flex": "1 0 50% ",
-        "flexDirection": "column",
+        "height": "100%",
       }
     }
   >
-    <div>
-      <button
-        onClick={[Function]}
+    <section
+      className="css-a6iqn1"
+    >
+      <header
+        className="chakra-stack css-1v40tsk"
+        style={
+          Object {
+            "marginBottom": "15px",
+          }
+        }
       >
-        Run
-      </button>
-    </div>
-    <CodeEditorContainer />
-  </div>
-  <div
-    style={
-      Object {
-        "flex": "1 0 50%",
-        "position": "relative",
-      }
-    }
-  >
-    <OutputVizContainer />
+        <button
+          className="chakra-button css-1d88tv1"
+          onClick={[Function]}
+          type="button"
+        >
+          Run
+        </button>
+        <button
+          aria-controls="menu-list-2"
+          aria-expanded={false}
+          aria-haspopup="menu"
+          className="chakra-button chakra-menu__menu-button css-1d88tv1"
+          id="menu-button-2"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          type="button"
+        >
+          <span
+            className="css-a9hmjk"
+          >
+            Examples
+          </span>
+          <span
+            className="chakra-button__icon css-1f2k2gl"
+          >
+            <svg
+              aria-hidden={true}
+              className="chakra-icon css-onkibi"
+              focusable={false}
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
+        </button>
+        <mock-portal />
+      </header>
+      <div
+        className="css-94739u"
+      >
+        <CodeEditorContainer />
+      </div>
+    </section>
+    <section
+      className="css-1swlae3"
+    >
+      <OutputVizContainer />
+    </section>
   </div>
 </div>
 `;

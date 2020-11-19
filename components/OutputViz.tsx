@@ -1,3 +1,4 @@
+import { useStyleConfig, useTheme } from '@chakra-ui/react';
 import { scaleLinear } from 'd3';
 import { find, flatten, get, map, max } from 'lodash';
 import React from 'react';
@@ -8,6 +9,8 @@ interface Props {
 }
 
 const OutputViz: React.FC<Props> = props => {
+  const theme = useTheme();
+  const textColor = theme.colors.whiteAlpha['900'];
   const { output } = props;
   if (!output || output.length === 0) {
     return null;
@@ -28,8 +31,10 @@ const OutputViz: React.FC<Props> = props => {
         );
         return (
           <g key={stream.name} transform={`translate(0, ${100 * i})`}>
-            <text dominantBaseline="hanging">{stream.name}</text>
-            <path strokeWidth={1} stroke="black" d={`M 0 50 L ${xScale(completionTime)} 50`} />
+            <text fill={textColor} dominantBaseline="hanging">
+              {stream.name}
+            </text>
+            <path strokeWidth={1} stroke={textColor} d={`M 0 50 L ${xScale(completionTime)} 50`} />
             {stream.events
               .filter(event => event.type === 'value' || event.type === 'error')
               .map((event, j) => (
@@ -37,7 +42,7 @@ const OutputViz: React.FC<Props> = props => {
                   {event.type === 'value' && (
                     <>
                       <circle r={25} fill="green" />
-                      <text dominantBaseline="middle" textAnchor="middle">
+                      <text fill={textColor} dominantBaseline="middle" textAnchor="middle">
                         {event.value}
                       </text>
                     </>
