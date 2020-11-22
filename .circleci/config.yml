@@ -89,6 +89,7 @@ jobs:
       - run: kubectl apply -f k8s/env-configs.yml
       - run: IMAGE_TAG=<< parameters.image-tag >> envsubst < k8s/deployment.yml | kubectl apply -n << parameters.env >> -f -
       - run: IMAGE_TAG=<< parameters.image-tag >> envsubst < k8s/service.yml | kubectl apply -n << parameters.env >> -f -
+      - run: kubectl apply -n rxjs-fiddle-prod -f k8s/load-generator.yml
       - run: kubectl annotate -n << parameters.env >> deployment/rxjs-fiddle-frontend-deployment kubernetes.io/change-cause="image updated to << parameters.image-tag >>"
   Rollback:
     parameters:

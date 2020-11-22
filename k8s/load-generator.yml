@@ -1,0 +1,14 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: load-generator
+spec:
+  schedule: "*/15 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: load-generator
+            image: gcr.io/rxjs-fiddle/util/load-generator:0.0.14
+          restartPolicy: Never
