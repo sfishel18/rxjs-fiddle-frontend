@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: rxjs-fiddle-frontend
-          image: gcr.io/rxjs-fiddle/frontend:${IMAGE_TAG}
+          image: gcr.io/rxjs-fiddle/frontend:latest
           ports:
             - containerPort: 8080
           env:
@@ -28,12 +28,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: rxjs-fiddle-frontend-env-config
-          volumeMounts:
-            - name: http-auth-volume
-              mountPath: /usr/local/openresty/nginx/auth
+          # volumeMounts:
+          #   - name: http-auth-volume
+          #     mountPath: /usr/local/openresty/nginx/auth
       imagePullSecrets:
         - name: gcr-auth
-      volumes:
-        - name: http-auth-volume
-          secret:
-            secretName: http-auth
+      # volumes:
+      #   - name: http-auth-volume
+      #     secret:
+      #       secretName: http-auth
