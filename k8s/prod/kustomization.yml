@@ -5,7 +5,7 @@ configMapGenerator:
   - name: rxjs-fiddle-frontend-env-config
     literals:
     - API_URL=http://api.rxjs-fiddle.com
-    - AUTH_BASIC='off'
+    # - AUTH_BASIC='off'
 resources:
   - namespace.yml
   - deployment.yml
