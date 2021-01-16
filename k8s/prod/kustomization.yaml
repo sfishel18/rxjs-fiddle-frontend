@@ -1,7 +1,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-metadata:
-  name: rxjs-fiddle-frontend-prod-template
 namespace: rxjs-fiddle-frontend-prod
 # configMapGenerator:
 #   - name: rxjs-fiddle-frontend-env-config
@@ -9,6 +7,6 @@ namespace: rxjs-fiddle-frontend-prod
 #     - API_URL=http://api.rxjs-fiddle.com
 #     - AUTH_BASIC='off'
 resources:
-  - namespace.yml
-  - deployment.yml
-  - service.yml
+  - namespace.yaml
+  - deployment.yaml
+  - service.yaml
