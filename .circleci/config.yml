@@ -84,13 +84,13 @@ workflows:
       - Hold for Publish To Production:
           type: approval
           requires:
-            - Deploy
+            - Build and Publish Image
           filters:
             branches:
               only: master
       - Bump Git Tag:
           requires:
-            - Hold for Deploy To Production
+            - Hold for Publish To Production
           filters:
             branches:
               only: master
