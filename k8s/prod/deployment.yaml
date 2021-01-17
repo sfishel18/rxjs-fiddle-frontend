@@ -32,7 +32,7 @@ spec:
           #   - name: http-auth-volume
           #     mountPath: /usr/local/openresty/nginx/auth
       imagePullSecrets:
-        - name: gcr-account-secret
+        - name: rxjs-fiddle-image-pull-secret
       # volumes:
       #   - name: http-auth-volume
       #     secret:
