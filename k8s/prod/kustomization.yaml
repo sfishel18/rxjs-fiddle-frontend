@@ -10,3 +10,5 @@ configMapGenerator:
       - AUTH_BASIC='off'
 resources:
   - namespace.yaml
+patchesStrategicMerge:
+  - set-namespace.yaml

@@ -10,3 +10,5 @@ configMapGenerator:
       - AUTH_BASIC='Staging Environment'
 resources:
   - namespace.yaml
+patchesStrategicMerge:
+  - set-namespace.yaml
