@@ -3,12 +3,11 @@ kind: Kustomization
 bases:
   - ../base
 namespace: rxjs-fiddle-stg
+nameSuffix: -stg
 configMapGenerator:
   - name: rxjs-fiddle-frontend-env-config
     literals:
       - API_URL=http://api-staging.rxjs-fiddle.com
       - AUTH_BASIC='Staging Environment'
-resources:
-  - namespace.yaml
 patchesStrategicMerge:
   - set-namespace.yaml

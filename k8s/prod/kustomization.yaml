@@ -3,12 +3,11 @@ kind: Kustomization
 bases:
   - ../base
 namespace: rxjs-fiddle-prod
+nameSuffix: -prod
 configMapGenerator:
   - name: rxjs-fiddle-frontend-env-config
     literals:
       - API_URL=http://api.rxjs-fiddle.com
       - AUTH_BASIC='off'
-resources:
-  - namespace.yaml
 patchesStrategicMerge:
   - set-namespace.yaml
