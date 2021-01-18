@@ -7,5 +7,7 @@ configMapGenerator:
     - API_URL=http://api.rxjs-fiddle.com
     - AUTH_BASIC='off'
 resources:
+  - namespace.yaml
+  - image-pull-secret.yaml
   - deployment.yaml
   - service.yaml

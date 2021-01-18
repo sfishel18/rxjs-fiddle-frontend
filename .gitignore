@@ -67,4 +67,5 @@ typings/
 build
 
 k8s/account.json
+k8s/*.pem
 storybook-static/
