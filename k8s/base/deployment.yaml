@@ -31,8 +31,8 @@ spec:
           # volumeMounts:
           #   - name: http-auth-volume
           #     mountPath: /usr/local/openresty/nginx/auth
-      imagePullSecrets:
-        - name: rxjs-fiddle-image-pull-secret
+      # imagePullSecrets:
+      #   - name: rxjs-fiddle-image-pull-secret
       # volumes:
       #   - name: http-auth-volume
       #     secret:

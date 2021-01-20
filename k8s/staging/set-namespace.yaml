@@ -5,4 +5,15 @@ metadata:
 spec:
   template:
     metadata:
+      name: rxjs-fiddle-image-pull-secret-stg
       namespace: rxjs-fiddle-stg
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rxjs-fiddle-frontend-deployment
+spec:
+  template:
+    spec:
+      imagePullSecrets: 
+        - name: rxjs-fiddle-image-pull-secret-stg
