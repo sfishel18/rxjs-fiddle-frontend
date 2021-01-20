@@ -1,13 +1,3 @@
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
-metadata:
-  name: rxjs-fiddle-image-pull-secret
-spec:
-  template:
-    metadata:
-      name: rxjs-fiddle-image-pull-secret-stg
-      namespace: rxjs-fiddle-stg
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
