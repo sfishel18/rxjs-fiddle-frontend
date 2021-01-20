@@ -12,4 +12,4 @@ configMapGenerator:
 resources:
   - image-pull-secret.yaml
 patchesStrategicMerge:
-  - set-namespace.yaml
+  - set-image-pull-secret.yaml
