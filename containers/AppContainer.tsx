@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
-import { useRecoilState } from 'recoil';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
 import App from '../components/App';
 import { useAtoms } from '../stores/atoms-store';
 

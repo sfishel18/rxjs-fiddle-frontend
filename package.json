@@ -73,7 +73,7 @@
     "prismjs": "^1.21.0",
     "react": "0.0.0-experimental-94c0244ba",
     "react-dom": "0.0.0-experimental-94c0244ba",
-    "recoil": "0.0.11",
+    "recoil": "^0.1.2",
     "zipkin": "^0.22.0",
     "zipkin-javascript-opentracing": "^2.1.0",
     "zipkin-transport-http": "^0.22.0"
