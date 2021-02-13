@@ -3,12 +3,13 @@ import React from 'react';
 
 const mockReact = React;
 
-jest.mock('../containers/CodeEditorContainer', () => (props: {}) =>
-  mockReact.createElement('CodeEditorContainer', props),
-);
-jest.mock('../containers/OutputVizContainer', () => (props: {}) =>
-  mockReact.createElement('OutputVizContainer', props),
-);
+jest.mock('../hooks/use-view-model', () => () => ({
+  examples: [],
+  submitEditorState: () => {},
+}));
+
+jest.mock('./CodeEditor', () => (props: {}) => mockReact.createElement('CodeEditor', props));
+jest.mock('./OutputViz', () => (props: {}) => mockReact.createElement('OutputViz', props));
 
 initStoryshots({
   storyKindRegex: /^App$/,

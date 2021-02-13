@@ -1,16 +1,17 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import { noop } from 'lodash';
 import React from 'react';
+import { RecoilRoot } from 'recoil';
 import mockApi from '../mocks/mock-api';
-import AtomsStore from '../stores/atoms-store';
+import ApiStore from '../stores/ApiStore';
 import App from './App';
 
 export default {
   decorators: [
-    (storyFn: React.FC) => <AtomsStore api={mockApi}>{storyFn({})}</AtomsStore>,
+    (storyFn: React.FC) => <RecoilRoot>{storyFn({})}</RecoilRoot>,
+    (storyFn: React.FC) => <ApiStore api={mockApi}>{storyFn({})}</ApiStore>,
     (storyFn: React.FC) => <ChakraProvider>{storyFn({})}</ChakraProvider>,
   ],
   title: 'App',
 };
 
-export const defaultState = () => <App onRunFiddle={noop} examples={[]} onExampleSelect={noop} />;
+export const defaultState = () => <App />;

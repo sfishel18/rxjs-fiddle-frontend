@@ -1,29 +1,27 @@
-import { useStyleConfig, useTheme } from '@chakra-ui/react';
+import { useTheme } from '@chakra-ui/react';
 import { scaleLinear } from 'd3';
 import { find, flatten, get, map, max } from 'lodash';
-import React from 'react';
-import { FiddleOutput } from '../types';
+import React, { memo } from 'react';
+import { ViewModel } from '../hooks/use-view-model';
 
-interface Props {
-  output: FiddleOutput | null;
-}
+type Props = Pick<ViewModel, 'fiddleOutputLoadable'>;
 
-const OutputViz: React.FC<Props> = props => {
+const OutputViz: MemoizedFC<Props> = memo(props => {
   const theme = useTheme();
   const textColor = theme.colors.whiteAlpha['900'];
-  const { output } = props;
-  if (!output || output.length === 0) {
+  const fiddleOutput = props.fiddleOutputLoadable.getValue();
+  if (!fiddleOutput || fiddleOutput.length === 0) {
     return null;
   }
   const maxTimeValue =
-    max(flatten(map(output, stream => stream.events.map(event => event.timestamp)))) || 0;
+    max(flatten(map(fiddleOutput, stream => stream.events.map(event => event.timestamp)))) || 0;
   const xScale = scaleLinear()
     .domain([0, maxTimeValue * 1.1])
     .range([0, 700])
     .clamp(true);
   return (
     <svg width={700} height={500}>
-      {output.map((stream, i) => {
+      {fiddleOutput.map((stream, i) => {
         const completionTime = get(
           find(stream.events, { type: 'complete' }),
           'timestamp',
@@ -59,6 +57,6 @@ const OutputViz: React.FC<Props> = props => {
       })}
     </svg>
   );
-};
+});
 
 export default OutputViz;

@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import { RecoilRoot } from 'recoil';
 import api from './api';
-import AppContainer from './containers/AppContainer';
-import AtomsStore from './stores/atoms-store';
+import App from './components/App';
+import ApiStore from './stores/ApiStore';
 
 // tslint:disable-next-line: no-any
 (ReactDom as any).unstable_createRoot(document.getElementById('app')).render(
-  <AtomsStore api={api}>
-    <AppContainer />
-  </AtomsStore>,
+  <RecoilRoot>
+    <ApiStore api={api}>
+      <App />
+    </ApiStore>
+  </RecoilRoot>,
 );

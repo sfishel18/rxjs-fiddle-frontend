@@ -1,5 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
+import { Loadable } from 'recoil';
 import { FiddleOutput } from '../types';
 import OutputViz from './OutputViz';
 
@@ -8,7 +9,7 @@ export default {
   decorators: [(storyFn: React.FC) => <ChakraProvider>{storyFn({})}</ChakraProvider>],
 };
 
-const output: FiddleOutput = [
+const output = [
   {
     name: 'interval',
     id: 'interval-1',
@@ -50,4 +51,6 @@ const output: FiddleOutput = [
   },
 ];
 
-export const simpleOutput = () => <OutputViz output={output} />;
+const outputLoadable = ({ getValue: () => output } as unknown) as Memoized<Loadable<FiddleOutput>>;
+
+export const simpleOutput = () => <OutputViz fiddleOutputLoadable={outputLoadable} />;

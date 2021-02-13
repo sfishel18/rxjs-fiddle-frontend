@@ -1,11 +1,18 @@
-import dedent from 'dedent';
 import { convertFromRaw, convertToRaw, EditorState } from 'draft-js';
 import PrismDecorator from 'draft-js-prism';
 import { once } from 'lodash';
 import Prism from 'prismjs';
-import React, { useContext } from 'react';
-import { atom, RecoilRoot, selector } from 'recoil';
+import { useCallback } from 'react';
+import {
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+  useRecoilValueLoadable,
+  useSetRecoilState,
+} from 'recoil';
 import { Api } from '../api';
+import { useApi } from '../stores/ApiStore';
 import { FiddleOutput } from '../types';
 
 // tslint:disable-next-line: no-var-requires
@@ -50,23 +57,23 @@ const editorStateExamples = [
   },
 ];
 
-const createAtoms = once((api: Api) => {
-  const editorStateOptionsAtom = atom({
-    default: editorStateExamples,
-    key: 'editor-state-examples',
-  });
+const editorStateOptionsAtom = atom({
+  default: editorStateExamples,
+  key: 'editor-state-examples',
+});
 
-  const editorStateAtom = atom<EditorState>({
-    default: editorStateExamples[0].value,
-    key: 'editor-state',
-  });
+const editorStateAtom = atom<EditorState>({
+  default: editorStateExamples[0].value,
+  key: 'editor-state',
+});
 
-  const editorStateSubmittedAtom = atom<EditorState | null>({
-    default: null,
-    key: 'editor-state-submitted',
-  });
+const editorStateSubmittedAtom = atom<EditorState | null>({
+  default: null,
+  key: 'editor-state-submitted',
+});
 
-  const fiddleOutputSelector = selector<FiddleOutput | null>({
+const getFiddleOutputSelector = once((api: Api) =>
+  selector<FiddleOutput | null>({
     get: async ({ get }) => {
       const fiddleSource = get(editorStateSubmittedAtom);
       if (!fiddleSource) {
@@ -79,29 +86,41 @@ const createAtoms = once((api: Api) => {
       );
     },
     key: 'fiddle-output',
-  });
+  }),
+);
+
+const useViewModel = () => {
+  const api = useApi();
+  const [editorState, setEditorState] = useRecoilState(editorStateAtom);
+  const setEditorStateSubmitted = useSetRecoilState(editorStateSubmittedAtom);
+  const examples = useRecoilValue(editorStateOptionsAtom);
+  const fiddleOutputLoadable = useRecoilValueLoadable(getFiddleOutputSelector(api));
+
+  const submitEditorState = useCallback(() => setEditorStateSubmitted(editorState), [
+    setEditorStateSubmitted,
+    editorState,
+  ]);
+  const selectExample = useCallback(
+    (selectedId: string) => {
+      const selectedExample = examples.find(({ id }) => id === selectedId);
+      if (selectedExample) {
+        setEditorState(selectedExample.value);
+      }
+    },
+    [examples, setEditorState],
+  );
 
   return {
-    editorStateOptionsAtom,
-    editorStateAtom,
-    editorStateSubmittedAtom,
-    fiddleOutputSelector,
+    editorState,
+    setEditorState,
+    setEditorStateSubmitted,
+    examples,
+    submitEditorState,
+    selectExample,
+    fiddleOutputLoadable,
   };
-});
-
-type Atoms = ReturnType<typeof createAtoms>;
-
-const AtomsContext = React.createContext<Atoms>((null as unknown) as Atoms);
-
-const AtomsStore: React.FC<{ api: Api }> = props => {
-  const atoms = createAtoms(props.api);
-  return (
-    <RecoilRoot>
-      <AtomsContext.Provider value={atoms}>{props.children}</AtomsContext.Provider>
-    </RecoilRoot>
-  );
 };
 
-export default AtomsStore;
+export type ViewModel = ReturnType<typeof useViewModel>;
 
-export const useAtoms = () => useContext(AtomsContext);
+export default useViewModel;

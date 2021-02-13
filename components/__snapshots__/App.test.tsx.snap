@@ -66,13 +66,13 @@ exports[`Storyshots App Default State 1`] = `
       <div
         className="css-94739u"
       >
-        <CodeEditorContainer />
+        <CodeEditor />
       </div>
     </section>
     <section
       className="css-1swlae3"
     >
-      <OutputVizContainer />
+      <OutputViz />
     </section>
   </div>
 </div>
