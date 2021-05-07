@@ -68,7 +68,7 @@
     "draft-js-prism": "^1.0.6",
     "framer-motion": "^2.9.4",
     "js-cookie": "^2.2.0",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "opentracing": "^0.14.4",
     "prismjs": "^1.21.0",
     "react": "0.0.0-experimental-696e736be",
